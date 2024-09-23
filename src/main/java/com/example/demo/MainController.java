@@ -9,6 +9,6 @@ public class MainController {
     @GetMapping("/article")
     @ResponseBody
     public String article(){
-        return "article 입니다.";
+        return "article 입니다.!!!! ";
     }
 }
