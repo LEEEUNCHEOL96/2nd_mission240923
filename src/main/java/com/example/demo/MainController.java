@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MainController {
     @GetMapping("/article")
     @ResponseBody
-    public String article(){
+    public String article() {
         return "article 입니다.!!!! ";
     }
 
     @GetMapping("/")
-    public String root(){
+    public String root() {
         return "redirect:/article_list";
     }
 }

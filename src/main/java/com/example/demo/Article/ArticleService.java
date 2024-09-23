@@ -17,7 +17,7 @@ import java.util.Optional;
 public class ArticleService {
     private final ArticleRepository articleRepository;
 
-    public List<Article> getList(){
+    public List<Article> getList() {
         return this.articleRepository.findAll();
     }
 
@@ -25,7 +25,7 @@ public class ArticleService {
     public Article getArticle(Integer id) {
 
         Optional<Article> optionalArticle = this.articleRepository.findById(id);
-        if(optionalArticle.isEmpty()){
+        if (optionalArticle.isEmpty()) {
             return null;
         }
         return optionalArticle.get();

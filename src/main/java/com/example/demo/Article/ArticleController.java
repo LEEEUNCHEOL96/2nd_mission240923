@@ -16,15 +16,15 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @GetMapping("/list")
-    public String articleList(Model model, @RequestParam(value = "page",defaultValue = "0")int page){
-        Page<Article> paging =this.articleService.getList(page);
-        model.addAttribute("paging",paging);
+    public String articleList(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+        Page<Article> paging = this.articleService.getList(page);
+        model.addAttribute("paging", paging);
 
         return "article_list";
     }
 
     @GetMapping("/detail/{id}")
-    public  String detail(@PathVariable("id") Integer id , Model model){
+    public String detail(@PathVariable("id") Integer id, Model model) {
         Article article = this.articleService.getArticle(id);
 
         model.addAttribute("article", article);
@@ -32,17 +32,17 @@ public class ArticleController {
     }
 
     @GetMapping("/create")
-    public String create(ArticleForm articleForm){
+    public String create(ArticleForm articleForm) {
 
         return "article_form";
     }
 
     @PostMapping("/create")
-    public String create(@Valid ArticleForm articleForm, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+    public String create(@Valid ArticleForm articleForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "article_form";
         }
-        this.articleService.create(articleForm.getTitle(),articleForm.getContent());
+        this.articleService.create(articleForm.getTitle(), articleForm.getContent());
         return "redirect:/article/list";
     }
 }
