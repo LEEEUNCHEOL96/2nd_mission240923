@@ -22,7 +22,7 @@ public class ArticleController {
     @GetMapping("/list")
     public String articleList(Model model){
         List<Article> articleList = this.articleService.getList();
-        model.addAttribute("article",articleList);
+        model.addAttribute("articleList",articleList);
 
         return "article_list";
     }
