@@ -11,4 +11,9 @@ public class MainController {
     public String article(){
         return "article 입니다.!!!! ";
     }
+
+    @GetMapping("/")
+    public String root(){
+        return "redirect:/article_list";
+    }
 }
