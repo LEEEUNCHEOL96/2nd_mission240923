@@ -13,11 +13,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ArticleController {
 
-    private final ArticleRepository articleRepository;
+    private final ArticleService articleService;
 
     @GetMapping("/list")
     public String articleList(Model model){
-        List<Article> articleList = this.articleRepository.findAll();
+        List<Article> articleList = this.articleService.getList();
         model.addAttribute("article",articleList);
 
         return "article_list";
