@@ -1,0 +1,19 @@
+<html layout:decorate="~{layout}">
+<div class="container my-3" layout:fragment="content">
+    <div class="container my-3">
+        <h5 class="my-3 border-bottom pb-2">Article 등록</h5>
+        <form method="post" th:action="@{/article/create}" th:object="${articleForm}">
+            <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+            <div class="mb-3">
+                <label class="form-label" for="title">제목</label>
+                <input class="form-control" th:field="*{title}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="content">내용</label>
+                <textarea class="form-control" rows="10" th:field="*{content}"></textarea>
+            </div>
+            <input class="btn btn-primary my-2" type="submit" value="저장하기">
+        </form>
+    </div>
+</div>
+</html>
