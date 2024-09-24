@@ -54,4 +54,7 @@ public class ArticleService {
         this.articleRepository.save(article);
     }
 
+    public void delete(Article article) {
+        this.articleRepository.delete(article);
+    }
 }

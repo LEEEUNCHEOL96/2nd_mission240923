@@ -59,7 +59,7 @@ public class ArticleController {
         return "redirect:/article/list";
     }
 
-    @PreAuthorize("isAuthenticated")
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
     public String modifyArticle(ArticleForm articleForm, @PathVariable("id") Integer id, Principal principal){
         Article article = this.articleService.getList(id);
@@ -72,7 +72,7 @@ public class ArticleController {
         return "article_form";
     }
 
-    @PreAuthorize("isAuthenticated")
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{id}")
     public String modifyArticle(@Valid ArticleForm articleForm, BindingResult bindingResult,
                                 Principal principal, @PathVariable("id") Integer id){
@@ -85,5 +85,16 @@ public class ArticleController {
         }
         this.articleService.modify(article, articleForm.getTitle(),articleForm.getContent());
         return String.format("redirect:/article/detail/%s",id);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{id}")
+    public String deleteArticle(Principal principal, @PathVariable("id") Integer id){
+        Article article = this.articleService.getList(id);
+        if(!article.getAuthor().getUsername().equals(principal.getName())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+        }
+        this.articleService.delete(article);
+        return "redirect:/";
     }
 }
