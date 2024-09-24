@@ -1,5 +1,6 @@
 package com.example.demo.Article;
 
+import com.example.demo.User.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,10 +32,11 @@ public class ArticleService {
         return optionalArticle.get();
     }
 
-    public void create(String title, String content) {
+    public void create(String title, String content, SiteUser user) {
         Article article = new Article();
         article.setTitle(title);
         article.setContent(content);
+        article.setAuthor(user);
         article.setCreateDate(LocalDateTime.now());
         this.articleRepository.save(article);
     }
@@ -45,5 +47,16 @@ public class ArticleService {
 
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return this.articleRepository.findAll(pageable);
+    }
+
+    public void modify(Article article, String title, String content){
+        article.setTitle(title);
+        article.setContent(content);
+        article.setModifyDate(LocalDateTime.now());
+        this.articleRepository.save(article);
+    }
+
+    public void delete(Article article) {
+        this.articleRepository.delete(article);
     }
 }
